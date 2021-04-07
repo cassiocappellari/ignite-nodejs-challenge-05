@@ -17,7 +17,7 @@
           {
             "in": "header",
             "name": "user_id",
-            "description": "Identificador do usuário",
+            "description": "User identifier",
             "schema": {
               "type": "string",
               "example": "2e476b59-6f95-4b5f-9cb0-b0bfbf8d3f58"
@@ -151,6 +151,147 @@
                   "properties": {
                     "error": {
                       "example": "email already exists"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": ["Users"],
+        "description": "Return a user by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "description": "User identifier",
+            "schema": {
+              "type": "string",
+              "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "admin": {
+                      "type": "boolean" 
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Cássio Cappellari"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "cassiocappellari@gmail.com"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "error": {
+                      "example": "user not exists"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": ["Users"],
+        "description": "Turn a user into admin",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "description": "User identifier",
+            "schema": {
+              "type": "string",
+              "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Cássio Cappellari"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "cassiocappellari@gmail.com"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "error": {
+                      "example": "user not found"
                     }
                   }
                 }
