@@ -12,7 +12,7 @@
     "/users": {
       "get": {
         "tags": ["Users"],
-        "description": "Lista all created users",
+        "description": "List all created users",
         "parameters": [
           {
             "in": "header",
@@ -72,7 +72,85 @@
                   "type":"object",
                   "properties": {
                     "error": {
-                      "type": "string"
+                      "example": "unauthorized user"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Users"],
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example":"Cássio Cappellari",
+                    "description": "User name"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "cassiocappellari@gmail.com",
+                    "description": "User email"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Cássio Cappellari"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "cassiocappellari@gmail.com"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "error": {
+                      "example": "email already exists"
                     }
                   }
                 }
