@@ -12,6 +12,7 @@
     "/users": {
       "get": {
         "tags": ["Users"],
+        "summary": "only admin users can access this route",
         "description": "List all created users",
         "parameters": [
           {
@@ -65,7 +66,7 @@
             }
           },
           "400": {
-            "description": "Unauthorized user.",
+            "description": "Unauthorized user / User not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -85,6 +86,7 @@
         "tags": ["Users"],
         "description": "Create a new user",
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -189,7 +191,8 @@
                       "format": "uuid"
                     },
                     "admin": {
-                      "type": "boolean" 
+                      "type": "boolean",
+                      "example": false
                     },
                     "name": {
                       "type": "string",
@@ -213,14 +216,14 @@
             }
           },
           "404": {
-            "description": "Bad Request",
+            "description": "User not found.",
             "content": {
               "application/json": {
                 "schema": {
                   "type":"object",
                   "properties": {
                     "error": {
-                      "example": "user not exists"
+                      "example": "user not found"
                     }
                   }
                 }
@@ -284,7 +287,7 @@
             }
           },
           "404": {
-            "description": "Bad Request",
+            "description": "User not found.",
             "content": {
               "application/json": {
                 "schema": {
